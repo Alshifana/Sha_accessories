@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ivory text-charcoal antialiased;
+  }
+  ::selection {
+    @apply bg-gold/20 text-charcoal;
+  }
+  :focus-visible {
+    outline: 2px solid #A9803F;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Signature element: the "gold thread" — a hand-stitched hairline divider
+     that draws itself in, echoing the hand-craftsmanship of the product. */
+  .thread-divider {
+    position: relative;
+    height: 9px;
+    width: 64px;
+    overflow: hidden;
+  }
+  .thread-divider::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+      to right,
+      #A9803F 0px,
+      #A9803F 6px,
+      transparent 6px,
+      transparent 11px
+    );
+  }
+
+  .thread-divider-animate::before {
+    animation: draw-line 1s ease forwards;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-widest2 text-gold-dark;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-charcoal text-ivory px-7 py-3.5 text-sm tracking-wide transition-all duration-300 hover:bg-gold-dark active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-charcoal/70 text-charcoal px-7 py-3.5 text-sm tracking-wide transition-all duration-300 hover:border-charcoal hover:bg-charcoal hover:text-ivory active:scale-[0.98];
+  }
+
+  .card-lift {
+    @apply transition-all duration-500 ease-out hover:-translate-y-1.5;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-beige/70;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.6s infinite;
+  }
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
