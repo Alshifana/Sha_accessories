@@ -7,6 +7,8 @@ import type { Product } from "@/lib/types";
 
 type ProductSlug = { slug: string };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const products = (await getAllProducts()) as ProductSlug[];
   return products.map((p: ProductSlug) => ({ slug: p.slug }));

@@ -12,6 +12,8 @@ type CategoryCard = {
   image: string;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const categories = (await getAllCategories()) as CategorySlug[];
   return categories.map((c: CategorySlug) => ({ slug: c.slug }));

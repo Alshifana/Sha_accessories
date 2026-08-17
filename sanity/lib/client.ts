@@ -5,7 +5,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  // `false` in development so edits show up immediately without needing to
-  // wait for the CDN cache; Sanity recommends `true` in production.
-  useCdn: process.env.NODE_ENV === "production",
+  // Storefront pages should show newly published Studio content immediately
+  // after deployment/request instead of waiting for Sanity CDN cache.
+  useCdn: false,
 });

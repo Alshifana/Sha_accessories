@@ -76,7 +76,7 @@ export function ShopClient({ categories, products }: ShopClientProps) {
         break;
     }
     return list;
-  }, [query, activeCategories, priceRange, minRating, sort, initialFilter]);
+  }, [products, query, activeCategories, priceRange, minRating, sort, initialFilter]);
 
   return (
     <div className="pt-32 pb-24">
