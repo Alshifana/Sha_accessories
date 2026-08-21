@@ -7,7 +7,7 @@ import { CheckCircle2, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 
-type OrderInfo = { orderId: string; total: number; items: number };
+type OrderInfo = { orderId: string; total: number; items: number; accountCreated?: boolean };
 
 export default function OrderSuccessPage() {
   const [order, setOrder] = useState<OrderInfo | null>(null);
@@ -34,6 +34,12 @@ export default function OrderSuccessPage() {
           Thank you — your order is being prepared with care. You can complete
           checkout as a guest or with an account.
         </p>
+
+        {order?.accountCreated && (
+          <p className="mt-2 max-w-md text-sm text-gold-dark">
+            Check your inbox to confirm your account and track this order in My Account.
+          </p>
+        )}
 
         {order && (
           <div className="mt-8 flex items-center gap-3 border border-border px-6 py-4 text-sm">

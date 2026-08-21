@@ -34,9 +34,11 @@ export function Navbar() {
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => setIsAuthed(!!data.user));
+    supabase.auth
+      .getUser()
+      .then(({ data }) => setIsAuthed(!!data.user && !data.user.is_anonymous));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthed(!!session?.user);
+      setIsAuthed(!!session?.user && !session.user.is_anonymous);
     });
     return () => listener.subscription.unsubscribe();
   }, []);

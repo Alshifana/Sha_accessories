@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
   const protectedPaths = ["/profile"];
   const isProtected = protectedPaths.some((p) => request.nextUrl.pathname.startsWith(p));
 
-  if (isProtected && !user) {
+  if (isProtected && (!user || user.is_anonymous)) {
     const redirectUrl = new URL("/login", request.url);
     redirectUrl.searchParams.set("redirect", request.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);

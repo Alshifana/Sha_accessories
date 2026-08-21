@@ -14,7 +14,7 @@ export default async function ProfilePage() {
 
   // Middleware already guards this route, but this keeps the page safe if
   // it's ever reached directly (e.g. during local dev without middleware).
-  if (!user) redirect("/login?redirect=/profile");
+  if (!user || user.is_anonymous) redirect("/login?redirect=/profile");
 
   const [{ data: profile }, { data: addresses }, { data: orders }] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", user.id).single(),

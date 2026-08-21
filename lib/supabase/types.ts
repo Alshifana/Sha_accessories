@@ -1,3 +1,12 @@
+type ShippingAddress = {
+  full_name: string;
+  phone: string;
+  line1: string;
+  city: string;
+  state: string;
+  pincode: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -65,6 +74,8 @@ export type Database = {
           coupon_code: string | null;
           address_id: string | null;
           payment_method: string;
+          guest_email: string | null;
+          shipping_address: ShippingAddress | null;
           created_at: string;
         };
         Insert: {
@@ -78,6 +89,8 @@ export type Database = {
           coupon_code?: string | null;
           address_id?: string | null;
           payment_method: string;
+          guest_email?: string | null;
+          shipping_address?: ShippingAddress | null;
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["orders"]["Insert"]>;
